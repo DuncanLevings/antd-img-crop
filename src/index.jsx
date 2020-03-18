@@ -273,6 +273,8 @@ class ImgCrop extends Component {
                   disabled={resizeAndDrag === false}
                   onImageLoaded={this.onImageLoaded}
                   onChange={this.onCropChange}
+                  minWidth={this.props.width}
+                  minHeight={this.props.height}
                   keepSelection
                 />
               )}
