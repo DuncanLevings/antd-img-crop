@@ -22,7 +22,8 @@
     "src"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c"
+    "build": "rimraf dist && rollup -c",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "antd": "^3.26.7",
