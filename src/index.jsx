@@ -75,8 +75,25 @@ class ImgCrop extends Component {
     if (this.image !== undefined) return;
 
     this.image = image;
+
+    
+    // realXXX 实际大小，showXXX 显示大小
+    const { width, height } = this.props;
+
+    this.setState({
+      crop: {
+        unit: 'px',
+        aspect: 1,
+        width: width,
+        height: height,
+        x: 0,
+        y: 0,
+      },
+    });
+
+    return false;
   };
-  
+
   // 响应裁切变化
   onCropChange = (crop) => {
     this.setState({ crop });
