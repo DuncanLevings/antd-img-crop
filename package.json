@@ -1,7 +1,7 @@
 {
   "name": "antd-img-crop-royaltymine",
-  "version": "2.4.4",
-  "description": "An image cropper for Ant Design Upload",
+  "version": "2.4.5",
+  "description": "An custom royaltymine image cropper for Ant Design Upload",
   "keywords": [
     "react",
     "antd",
@@ -22,8 +22,7 @@
     "src"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "prepare": "npm run build"
+    "build": "rimraf dist && rollup -c"
   },
   "peerDependencies": {
     "antd": "^3.26.7",

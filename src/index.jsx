@@ -75,97 +75,8 @@ class ImgCrop extends Component {
     if (this.image !== undefined) return;
 
     this.image = image;
-
-    // realXXX 实际大小，showXXX 显示大小
-    const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
-    const { width: realCropWidth, height: realCropHeight, modalWidth } = this.props;
-
-    const cropRate = realCropWidth / realCropHeight;
-    const modalBodyWidth = modalWidth - 24 * 2;
-
-    let scale = 1;
-    let showImgWidth;
-    let showImgHeight;
-
-    let showCropWidth;
-    let showCropHeight;
-
-    let showCropX;
-    let showCropY;
-
-    let contain;
-    if (realCropWidth > realImgWidth || realCropHeight > realImgHeight) {
-      contain = true;
-    } else {
-      contain = this.props.contain;
-    }
-
-    // 设置数值大小
-    const setNumberData = () => {
-      showCropWidth = realCropWidth / scale;
-      showCropHeight = realCropHeight / scale;
-
-      showCropX = (showImgWidth - showCropWidth) / 2;
-      showCropY = (showImgHeight - showCropHeight) / 2;
-    };
-
-    // 设置填充容器
-    const setContainData = () => {
-      const imgRate = realImgWidth / realImgHeight;
-
-      if (cropRate > imgRate) {
-        // 裁剪框宽度大于图片
-        showCropWidth = showImgWidth;
-        showCropHeight = showCropWidth / cropRate;
-
-        showCropX = 0;
-        showCropY = (showImgHeight - showCropHeight) / 2;
-      } else {
-        // 裁剪框宽度小于图片
-        showCropHeight = showImgHeight;
-        showCropWidth = showCropHeight * cropRate;
-
-        showCropX = (showImgWidth - showCropWidth) / 2;
-        showCropY = 0;
-      }
-    };
-
-    // 设置数值大小 or 填充容器
-    const setCropData = () => {
-      contain === true ? setContainData() : setNumberData();
-    };
-
-    // 设置裁切相关值
-    if (realImgWidth > modalBodyWidth) {
-      // 图片宽度大于 Model
-      showImgWidth = modalBodyWidth;
-      scale = realImgWidth / showImgWidth;
-      showImgHeight = realImgHeight / scale;
-
-      this.scale = scale;
-
-      setCropData();
-    } else {
-      // 图片宽度小于 Model
-      showImgWidth = realImgWidth;
-      showImgHeight = realImgHeight;
-
-      setCropData();
-    }
-
-    this.setState({
-      crop: {
-        unit: 'px',
-        aspect: cropRate,
-        width: showCropWidth,
-        height: showCropHeight,
-        x: showCropX,
-        y: showCropY,
-      },
-    });
-
-    return false;
   };
+  
   // 响应裁切变化
   onCropChange = (crop) => {
     this.setState({ crop });
@@ -305,8 +216,8 @@ ImgCrop.propTypes = {
 };
 
 ImgCrop.defaultProps = {
-  width: 500,
-  height: 500,
+  width: 1000,
+  height: 1000,
   contain: false,
   resize: true,
   resizeAndDrag: true,
