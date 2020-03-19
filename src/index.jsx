@@ -156,7 +156,7 @@ class ImgCrop extends Component {
     this.setState({
       crop: {
         unit: 'px',
-        aspect: 1,
+        aspect: cropRate,
         width: showCropWidth,
         height: showCropHeight,
         x: showCropX,
@@ -303,10 +303,10 @@ ImgCrop.propTypes = {
 };
 
 ImgCrop.defaultProps = {
-  width: 1000,
-  height: 1000,
-  min: 1000,
-  max: 3000,
+  width: 100,
+  height: 100,
+  min: 100,
+  max: 300,
   contain: false,
   resize: true,
   resizeAndDrag: true,
