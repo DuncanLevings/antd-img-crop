@@ -76,7 +76,6 @@ class ImgCrop extends Component {
 
     this.image = image;
 
-    
     // realXXX 实际大小，showXXX 显示大小
     const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
     const { width: realCropWidth, height: realCropHeight, modalWidth } = this.props;
@@ -157,7 +156,7 @@ class ImgCrop extends Component {
     this.setState({
       crop: {
         unit: 'px',
-        aspect: cropRate,
+        aspect: 1,
         width: showCropWidth,
         height: showCropHeight,
         x: showCropX,
@@ -167,7 +166,6 @@ class ImgCrop extends Component {
 
     return false;
   };
-
   // 响应裁切变化
   onCropChange = (crop) => {
     this.setState({ crop });
@@ -249,7 +247,7 @@ class ImgCrop extends Component {
   };
 
   render() {
-    const { modalTitle, modalWidth, min, max, resize, resizeAndDrag } = this.props;
+    const { modalTitle, modalWidth, resize, resizeAndDrag } = this.props;
     const { modalVisible, src, crop } = this.state;
 
     return (
@@ -276,9 +274,7 @@ class ImgCrop extends Component {
                   onImageLoaded={this.onImageLoaded}
                   onChange={this.onCropChange}
                   minWidth={min}
-                  minHeight={min}
                   maxWidth={max}
-                  maxHeight={max}
                   keepSelection
                 />
               )}
@@ -309,6 +305,8 @@ ImgCrop.propTypes = {
 ImgCrop.defaultProps = {
   width: 1000,
   height: 1000,
+  min: 1000,
+  max: 3000,
   contain: false,
   resize: true,
   resizeAndDrag: true,
