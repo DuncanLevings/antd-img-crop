@@ -80,13 +80,10 @@ class ImgCrop extends Component {
 
     // realXXX 实际大小，showXXX 显示大小
     const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
-    let { min: minAmt, max: maxAmt, modalWidth } = this.props;
+    let { modalWidth } = this.props;
 
     this.setState({realWidth: realImgWidth, realHeight: realImgHeight});
 
-    if (!minAmt) minAmt = 1000;
-    if (!maxAmt) maxAmt = 3000;
-    
     const cropRate = 1;
     const modalBodyWidth = modalWidth - 24 * 2;
 
@@ -100,8 +97,8 @@ class ImgCrop extends Component {
     let showCropX;
     let showCropY;
 
-    let minScaleFactor = minAmt / 1000;
-    let maxScaleFactor = maxAmt / 3000;
+    this.minScale = 100;
+    this.maxScale = 295;
 
     let contain = this.props.contain;
     if (!contain) contain = false;
@@ -157,14 +154,6 @@ class ImgCrop extends Component {
       showImgHeight = realImgHeight;
 
       setCropData();
-    }
-
-    this.minScale = (showCropWidth / scale) * minScaleFactor;
-    if (this.minScale > 100) this.minScale = 100; //force at least 100
-    if (realImgWidth < 3000) {
-      this.maxScale = showCropWidth;
-    } else {
-      this.maxScale = this.minScale * maxScaleFactor;
     }
 
     this.setState({
