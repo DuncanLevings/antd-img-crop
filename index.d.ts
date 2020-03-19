@@ -5,8 +5,6 @@ declare module 'antd-img-crop-royaltymine' {
   export interface ImgCropProps {
     width?: number;
     height?: number;
-    min?: number;
-    max?: number;
     contain?: boolean;
     resize?: boolean;
     resizeAndDrag?: boolean;
