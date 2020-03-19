@@ -16,6 +16,8 @@ class ImgCrop extends Component {
     this.state = {
       modalVisible: false,
       src: null,
+      realWidth: 0,
+      realHeight: 0,
       crop: {},
     };
   }
@@ -80,8 +82,7 @@ class ImgCrop extends Component {
     const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
     let { min: minAmt, max: maxAmt, modalWidth } = this.props;
 
-    this.realWidth = realImgWidth;
-    this.realHeight = realImgHeight;
+    this.setState({realWidth: realImgWidth, realHeight: realImgHeight});
 
     if (!minAmt) minAmt = 1000;
     if (!maxAmt) maxAmt = 3000;
@@ -159,6 +160,7 @@ class ImgCrop extends Component {
     }
 
     this.minScale = (showCropWidth / scale) * minScaleFactor;
+    if (this.minScale > 100) this.minScale = 100; //force at least 100
     if (realImgWidth < 3000) {
       this.maxScale = showCropWidth;
     } else {
@@ -210,8 +212,8 @@ class ImgCrop extends Component {
 
     // 获取裁切后的图片
     const canvas = document.createElement('canvas');
-    canvas.width = this.realWidth;
-    canvas.height = this.realHeight;
+    canvas.width = this.state.realWidth;
+    canvas.height = this.state.realHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(image, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
 
