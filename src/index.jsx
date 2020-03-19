@@ -247,7 +247,7 @@ class ImgCrop extends Component {
   };
 
   render() {
-    const { modalTitle, modalWidth, resize, resizeAndDrag } = this.props;
+    const { modalTitle, modalWidth, min, max, resize, resizeAndDrag } = this.props;
     const { modalVisible, src, crop } = this.state;
 
     return (
@@ -273,10 +273,10 @@ class ImgCrop extends Component {
                   disabled={resizeAndDrag === false}
                   onImageLoaded={this.onImageLoaded}
                   onChange={this.onCropChange}
-                  minWidth={this.props.min}
-                  minHeight={this.props.min}
-                  maxWidth={this.props.max}
-                  maxHeight={this.props.max}
+                  minWidth={min}
+                  minHeight={min}
+                  maxWidth={max}
+                  maxHeight={max}
                   keepSelection
                 />
               )}
@@ -291,6 +291,8 @@ class ImgCrop extends Component {
 ImgCrop.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
+  min: PropTypes.number,
+  max: PropTypes.number,
   contain: PropTypes.bool,
   resize: PropTypes.bool,
   resizeAndDrag: PropTypes.bool,
@@ -303,8 +305,8 @@ ImgCrop.propTypes = {
 };
 
 ImgCrop.defaultProps = {
-  width: 1000,
-  height: 1000,
+  width: 500,
+  height: 500,
   contain: false,
   resize: true,
   resizeAndDrag: true,
