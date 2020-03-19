@@ -273,8 +273,10 @@ class ImgCrop extends Component {
                   disabled={resizeAndDrag === false}
                   onImageLoaded={this.onImageLoaded}
                   onChange={this.onCropChange}
-                  minWidth={this.props.width}
-                  minHeight={this.props.height}
+                  minWidth={this.props.min}
+                  minHeight={this.props.min}
+                  maxWidth={this.props.max}
+                  maxHeight={this.props.max}
                   keepSelection
                 />
               )}
