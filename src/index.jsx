@@ -78,10 +78,10 @@ class ImgCrop extends Component {
 
     // realXXX 实际大小，showXXX 显示大小
     const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
-    let { min: min, max: max, modalWidth } = this.props;
+    let { min: minAmt, max: maxAmt, modalWidth } = this.props;
 
-    if (!min) min = 1000;
-    if (!max) max = 3000;
+    if (!minAmt) minAmt = 1000;
+    if (!maxAmt) maxAmt = 3000;
     
     const cropRate = 1;
     const modalBodyWidth = modalWidth - 24 * 2;
@@ -96,8 +96,11 @@ class ImgCrop extends Component {
     let showCropX;
     let showCropY;
 
-    let minScaleFactor = min / 1000;
-    let maxScaleFactor = max / 3000;
+    let minScaleFactor = minAmt / 1000;
+    let maxScaleFactor = maxAmt / 3000;
+
+    let contain = this.props.contain;
+    if (!contain) contain = false;
 
     // 设置数值大小
     const setNumberData = () => {
