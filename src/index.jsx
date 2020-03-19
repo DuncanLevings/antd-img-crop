@@ -199,10 +199,13 @@ class ImgCrop extends Component {
       sHeight = sHeight * scale;
     }
 
+    const dWidth = this.state.realWidth;
+    const dHeight = this.state.realHeight;
+
     // 获取裁切后的图片
     const canvas = document.createElement('canvas');
-    canvas.width = this.state.realWidth;
-    canvas.height = this.state.realHeight;
+    canvas.width = dWidth;
+    canvas.height = dHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(image, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
 
