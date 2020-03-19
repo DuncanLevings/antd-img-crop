@@ -80,6 +80,9 @@ class ImgCrop extends Component {
     const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
     let { min: minAmt, max: maxAmt, modalWidth } = this.props;
 
+    this.realWidth = realImgWidth;
+    this.realHeight = realImgHeight;
+
     if (!minAmt) minAmt = 1000;
     if (!maxAmt) maxAmt = 3000;
     
@@ -205,12 +208,10 @@ class ImgCrop extends Component {
       sHeight = sHeight * scale;
     }
 
-    const { width: dWidth, height: dHeight } = this.props;
-
     // 获取裁切后的图片
     const canvas = document.createElement('canvas');
-    canvas.width = dWidth;
-    canvas.height = dHeight;
+    canvas.width = this.realWidth;
+    canvas.height = this.realHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(image, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
 
@@ -296,8 +297,6 @@ class ImgCrop extends Component {
 }
 
 ImgCrop.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
   contain: PropTypes.bool,
   resize: PropTypes.bool,
   resizeAndDrag: PropTypes.bool,
@@ -310,8 +309,6 @@ ImgCrop.propTypes = {
 };
 
 ImgCrop.defaultProps = {
-  width: 100,
-  height: 100,
   contain: false,
   resize: true,
   resizeAndDrag: true,
