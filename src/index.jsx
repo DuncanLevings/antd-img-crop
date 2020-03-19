@@ -98,7 +98,7 @@ class ImgCrop extends Component {
     let showCropY;
 
     this.minScale = 100;
-    this.maxScale = 295;
+    this.maxScale = 300;
 
     let contain = this.props.contain;
     if (!contain) contain = false;
@@ -200,7 +200,7 @@ class ImgCrop extends Component {
     }
 
     const dWidth = this.state.realWidth;
-    const dHeight = this.state.realHeight;
+    const dHeight = this.state.realWidth; //needed to keep it sqaure
 
     // 获取裁切后的图片
     const canvas = document.createElement('canvas');
