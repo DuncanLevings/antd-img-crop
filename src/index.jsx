@@ -303,8 +303,8 @@ ImgCrop.propTypes = {
 };
 
 ImgCrop.defaultProps = {
-  width: 100,
-  height: 100,
+  width: 1000,
+  height: 1000,
   contain: false,
   resize: true,
   resizeAndDrag: true,
