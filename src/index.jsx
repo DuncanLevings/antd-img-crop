@@ -78,9 +78,12 @@ class ImgCrop extends Component {
 
     // realXXX 实际大小，showXXX 显示大小
     const { naturalWidth: realImgWidth, naturalHeight: realImgHeight } = image;
-    const { width: realCropWidth, height: realCropHeight, modalWidth } = this.props;
+    let { min: min, max: max, modalWidth } = this.props;
 
-    const cropRate = realCropWidth / realCropHeight;
+    if (!min) min = 1000;
+    if (!max) max = 3000;
+    
+    const cropRate = 1;
     const modalBodyWidth = modalWidth - 24 * 2;
 
     let scale = 1;
@@ -93,17 +96,13 @@ class ImgCrop extends Component {
     let showCropX;
     let showCropY;
 
-    let contain;
-    if (realCropWidth > realImgWidth || realCropHeight > realImgHeight) {
-      contain = true;
-    } else {
-      contain = this.props.contain;
-    }
+    let minScaleFactor = min / 1000;
+    let maxScaleFactor = max / 3000;
 
     // 设置数值大小
     const setNumberData = () => {
-      showCropWidth = realCropWidth / scale;
-      showCropHeight = realCropHeight / scale;
+      showCropWidth = realImgWidth / scale;
+      showCropHeight = realImgHeight / scale;
 
       showCropX = (showImgWidth - showCropWidth) / 2;
       showCropY = (showImgHeight - showCropHeight) / 2;
@@ -151,6 +150,13 @@ class ImgCrop extends Component {
       showImgHeight = realImgHeight;
 
       setCropData();
+    }
+
+    this.minScale = (showCropWidth / scale) * minScaleFactor;
+    if (realImgWidth < 3000) {
+      this.maxScale = showCropWidth;
+    } else {
+      this.maxScale = this.minScale * maxScaleFactor;
     }
 
     this.setState({
@@ -273,10 +279,8 @@ class ImgCrop extends Component {
                   disabled={resizeAndDrag === false}
                   onImageLoaded={this.onImageLoaded}
                   onChange={this.onCropChange}
-                  minWidth={this.props.min}
-                  minHeight={this.props.min}
-                  maxWidth={this.props.max}
-                  maxHeight={this.props.max}
+                  minWidth={this.minScale}
+                  maxWidth={this.maxScale}
                   keepSelection
                 />
               )}
