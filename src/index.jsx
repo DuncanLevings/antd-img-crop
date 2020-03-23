@@ -4,8 +4,6 @@ import LocaleReceiver from 'antd/es/locale-provider/LocaleReceiver';
 import Modal from 'antd/es/modal';
 import ReactCrop from 'react-image-crop';
 
-import 'antd/es/modal/style/index.css';
-import 'antd/es/button/style/index.css';
 import './index.scss';
 
 const MODAL_TITLE = 'Edit image';
